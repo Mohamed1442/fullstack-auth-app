@@ -11,8 +11,9 @@
       "@api/*": ["src/api/*"],
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@routes/*": ["src/routes/*"],
+      "@routers/*": ["src/routers/*"],
       "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"],
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@/*": ["src/*"]
