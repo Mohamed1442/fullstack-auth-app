@@ -1,6 +1,4 @@
-import { ELOCALSTORAGEKEYS } from "@constants/keys";
-
-export function getLocalStorageItem(key: ELOCALSTORAGEKEYS): string | null {
+export function getLocalStorageItem(key: string): string | null {
   try {
     const _item = localStorage.getItem(key);
     if (_item !== null) {
@@ -23,7 +21,7 @@ export function getLocalStorageItem(key: ELOCALSTORAGEKEYS): string | null {
 }
 
 export const setLocalStorage = (
-  key: ELOCALSTORAGEKEYS,
+  key: string,
   value: string | number | boolean | object
 ): void => {
   if (typeof window !== "undefined") {
@@ -33,7 +31,7 @@ export const setLocalStorage = (
   }
 };
 
-export const removeLocalStorage = (key: ELOCALSTORAGEKEYS): void => {
+export const removeLocalStorage = (key: string): void => {
   if (typeof window !== "undefined") {
     localStorage.removeItem(key);
   }
