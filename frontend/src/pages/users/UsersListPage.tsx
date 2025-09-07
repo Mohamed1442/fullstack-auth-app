@@ -1,9 +1,7 @@
 import { useUserList } from "@api/users/users.hooks";
-import type { IUserResponse } from "@api/users/users.types";
 import MainLoader from "@components/MainLoader/MainLoader";
 import MainPaginator from "@components/MainPaginator/MainPaginator";
 import useFilter from "@hooks/useFilter";
-import { convertUnderscoreToTitleCase } from "@utils/convertUnderscoreToTitleCase";
 import UsersTable from "./components/UsersTable";
 
 const UsersListPage = () => {
