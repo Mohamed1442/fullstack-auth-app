@@ -1,12 +1,12 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#ffd391",
-        danger: "#EF4444",
+        primary: "#f0754d",
+        secondary: "#ffd391",
+        error: "#D80027",
       },
     },
   },

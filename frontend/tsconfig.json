@@ -2,17 +2,7 @@
   "compilerOptions": {
     "types": ["node"],
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@api/*": ["src/api/*"],
-      "@pages/*": ["src/pages/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@routes/*": ["src/routes/*"],
-      "@utils/*": ["src/utils/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@/*": ["src/*"]
-    }
+    "baseUrl": "."
   },
   "files": [],
   "references": [
