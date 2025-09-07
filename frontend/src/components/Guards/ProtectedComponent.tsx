@@ -14,7 +14,7 @@ const ProtectedComponent: React.FC<IProtectedComponentProps> = ({
 }) => {
   const { isAllowed, isLoading } = useRole(allowerdRoles);
 
-  if (isLoading) return <MainLoader />;
+  if (isLoading) return <MainLoader size="xs" />;
   if (!isAllowed) return null;
 
   return children;
