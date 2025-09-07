@@ -50,7 +50,7 @@ export class AuthController {
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: this.configService.getOrThrow('NODE_ENV') !== 'local',
-      sameSite: 'lax',
+      sameSite: 'none',
       maxAge: +ms(
         this.configService.getOrThrow('JWT_REFRESH_TOKEN_EXPIRE_TIME_STRING'),
       ),
@@ -74,7 +74,7 @@ export class AuthController {
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: this.configService.getOrThrow('NODE_ENV') !== 'local',
-      sameSite: 'lax',
+      sameSite: 'none',
       maxAge: +ms(
         this.configService.getOrThrow('JWT_REFRESH_TOKEN_EXPIRE_TIME_STRING'),
       ),
@@ -89,7 +89,7 @@ export class AuthController {
   @ApiBearerAuth()
   async logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('refreshToken', {
-      sameSite: 'lax',
+      sameSite: 'none',
       secure: this.configService.getOrThrow('NODE_ENV') !== 'local',
       httpOnly: true,
     });
