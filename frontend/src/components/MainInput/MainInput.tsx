@@ -68,13 +68,13 @@ const MainInput = forwardRef<HTMLInputElement, IInputProps>(function Input(
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>): void => {
-    setIsFocused(true);
     rest.onFocus?.(e);
+    setIsFocused(true);
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>): void => {
-    setIsFocused(false);
     rest.onBlur?.(e);
+    setIsFocused(false);
   };
 
   const CurrentEndIcon = isPassword
@@ -106,7 +106,7 @@ const MainInput = forwardRef<HTMLInputElement, IInputProps>(function Input(
           aria-required={required}
           aria-invalid={!!error}
           autoComplete="off"
-          value={value}
+          value={value ?? ""}
           defaultValue={defaultValue}
           name={name}
           className={cn(
@@ -131,9 +131,9 @@ const MainInput = forwardRef<HTMLInputElement, IInputProps>(function Input(
             }
           )}
           onChange={handleInputChange}
+          {...rest}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          {...rest}
         />
         <label
           className={cn(
