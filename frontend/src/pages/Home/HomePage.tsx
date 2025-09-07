@@ -1,11 +1,20 @@
+import { logoutApi } from "@api/auth/auth.api";
 import { ERole } from "@api/users/users.types";
 import ProtectedComponent from "@components/Guards/ProtectedComponent";
 import MainButton from "@components/MainButton/MainButton";
 import { EROUTES } from "@constants/routes";
+import { tokenManager } from "@utils/tokenManager";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  const logoutHandling = async () => {
+    await logoutApi();
+    tokenManager.clearAccessToken();
+    tokenManager.clearRefreshToken();
+    navigate(EROUTES.AUTH);
+  };
 
   return (
     <div className="flex items-center justify-center h-screen bg-secondary flex-col">
@@ -22,6 +31,9 @@ const HomePage = () => {
             View System Users
           </MainButton>
         </ProtectedComponent>
+        <MainButton variant="danger" onClick={logoutHandling}>
+          Logout
+        </MainButton>
       </div>
     </div>
   );

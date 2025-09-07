@@ -1,4 +1,5 @@
 import type { ERole } from "@api/users/users.types";
+import MainLoader from "@components/MainLoader/MainLoader";
 import { EROUTES } from "@constants/routes";
 import useRole from "@hooks/useRole";
 import React from "react";
@@ -10,9 +11,10 @@ type Props = {
 };
 
 const ProtectedRoute: React.FC<Props> = ({ allowedRoles, children }) => {
-  const hasRole = useRole(allowedRoles);
+  const { isAllowed, isLoading } = useRole(allowedRoles);
 
-  if (!hasRole) return <Navigate to={EROUTES.ROOT} />;
+  if (isLoading) return <MainLoader />;
+  if (!isAllowed) return <Navigate to={EROUTES.ROOT} />;
 
   return children;
 };

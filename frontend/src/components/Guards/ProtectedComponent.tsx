@@ -1,4 +1,5 @@
 import type { ERole } from "@api/users/users.types";
+import MainLoader from "@components/MainLoader/MainLoader";
 import useRole from "@hooks/useRole";
 import { memo } from "react";
 
@@ -11,9 +12,11 @@ const ProtectedComponent: React.FC<IProtectedComponentProps> = ({
   allowerdRoles,
   children,
 }) => {
-  const hasRole = useRole(allowerdRoles);
+  const { isAllowed, isLoading } = useRole(allowerdRoles);
 
-  if (!hasRole) return null;
+  if (isLoading) return <MainLoader />;
+  if (!isAllowed) return null;
+
   return children;
 };
 
