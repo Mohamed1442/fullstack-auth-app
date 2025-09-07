@@ -6,6 +6,7 @@ import type {
 } from "@api/auth/auth.types";
 import { authEndpoints } from "@constants/endpoints";
 import envConfigKeys from "@constants/envConfig";
+import { tokenManager } from "@utils/tokenManager";
 import axios from "axios";
 
 const authAxiosInstance = axios.create({
@@ -36,7 +37,16 @@ export const signupApi = async (
 };
 
 export const logoutApi = (): Promise<void> =>
-  authAxiosInstance.post(authEndpoints.logout);
+  authAxiosInstance.post(
+    authEndpoints.logout,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${tokenManager.getAccessToken()}`,
+      },
+      withCredentials: true,
+    }
+  );
 
 export const refreshTokenApi = async (): Promise<IAuthResponse> => {
   const { data } = await authAxiosInstance.post<TAuthResponse>(

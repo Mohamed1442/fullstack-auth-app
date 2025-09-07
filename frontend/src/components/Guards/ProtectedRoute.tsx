@@ -13,7 +13,7 @@ type Props = {
 const ProtectedRoute: React.FC<Props> = ({ allowedRoles, children }) => {
   const { isAllowed, isLoading } = useRole(allowedRoles);
 
-  if (isLoading) return <MainLoader />;
+  if (isLoading) return <MainLoader size="xs" />;
   if (!isAllowed) return <Navigate to={EROUTES.ROOT} />;
 
   return children;

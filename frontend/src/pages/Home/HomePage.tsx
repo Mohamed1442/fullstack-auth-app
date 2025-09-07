@@ -1,19 +1,32 @@
+import type { ICustomAxiosError } from "@api/api";
 import { logoutApi } from "@api/auth/auth.api";
 import { ERole } from "@api/users/users.types";
 import ProtectedComponent from "@components/Guards/ProtectedComponent";
 import MainButton from "@components/MainButton/MainButton";
 import { EROUTES } from "@constants/routes";
 import { tokenManager } from "@utils/tokenManager";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const logoutHandling = async () => {
-    await logoutApi();
-    tokenManager.clearAccessToken();
-    tokenManager.clearRefreshToken();
-    navigate(EROUTES.AUTH);
+    try {
+      setIsLoading(true);
+      await logoutApi();
+    } catch (error) {
+      toast.error(
+        (error as ICustomAxiosError).response?.data?.error?.message[0]
+      );
+    } finally {
+      setIsLoading(false);
+      tokenManager.clearAccessToken();
+      tokenManager.clearRefreshToken();
+      navigate(EROUTES.AUTH);
+    }
   };
 
   return (
@@ -31,7 +44,11 @@ const HomePage = () => {
             View System Users
           </MainButton>
         </ProtectedComponent>
-        <MainButton variant="danger" onClick={logoutHandling}>
+        <MainButton
+          loading={isLoading}
+          variant="danger"
+          onClick={logoutHandling}
+        >
           Logout
         </MainButton>
       </div>
