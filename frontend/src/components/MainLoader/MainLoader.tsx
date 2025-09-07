@@ -17,7 +17,7 @@ const sizeClasses: Record<LoaderSize, string> = {
 const MainLoader = ({ size = "md", className }: MainLoaderProps) => {
   return (
     <div
-      className="flex items-center justify-center min-h-screen"
+      className="flex items-center justify-center"
       role="status"
       aria-label="Loading"
     >
