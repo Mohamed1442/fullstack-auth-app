@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   ApiSingleDataResponse,
@@ -11,9 +11,11 @@ import type { ICurrentUser } from 'src/global/interfaces';
 import { ResponseBuilder } from 'src/global/utilities';
 import { UserResponseDto } from '../dtos/responses';
 import { UserDocument } from '../schemas';
+import { TransactionInterceptor } from 'src/global/interceptors';
 
 @ApiTags('Users')
 @Controller('users')
+@UseInterceptors(TransactionInterceptor)
 @AuthRoles(ERole.USER, ERole.ADMIN)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
