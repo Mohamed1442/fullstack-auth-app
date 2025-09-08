@@ -28,7 +28,7 @@ const AuthLayout: FC = () => {
   }
 
   if (isPageLoading) {
-    return <MainLoader />;
+    return <MainLoader fullscreen />;
   }
 
   return (

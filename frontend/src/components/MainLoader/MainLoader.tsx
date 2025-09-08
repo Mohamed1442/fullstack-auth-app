@@ -3,6 +3,7 @@ import { cn } from "@utils/cn";
 type LoaderSize = "xs" | "sm" | "md" | "lg";
 
 interface MainLoaderProps {
+  fullscreen?: boolean;
   size?: LoaderSize;
   className?: string;
 }
@@ -14,10 +15,17 @@ const sizeClasses: Record<LoaderSize, string> = {
   lg: "w-20 h-20",
 };
 
-const MainLoader = ({ size = "md", className }: MainLoaderProps) => {
+const MainLoader = ({
+  size = "md",
+  className,
+  fullscreen = false,
+}: MainLoaderProps) => {
   return (
     <div
-      className="flex items-center justify-center"
+      className={cn("flex items-center justify-center", {
+        "flex min-h-[100vh] flex-col items-center justify-center overflow-y-auto":
+          fullscreen,
+      })}
       role="status"
       aria-label="Loading"
     >

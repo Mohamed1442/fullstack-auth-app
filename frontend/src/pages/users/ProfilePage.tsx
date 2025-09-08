@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const { data, isLoading } = useCurrentUserInfo();
 
   if (isLoading) {
-    return <MainLoader />;
+    return <MainLoader fullscreen />;
   }
 
   return (

@@ -4,6 +4,7 @@ import { ERole } from "@api/users/users.types";
 import ProtectedComponent from "@components/Guards/ProtectedComponent";
 import MainButton from "@components/MainButton/MainButton";
 import { EROUTES } from "@constants/routes";
+import { useQueryClient } from "@tanstack/react-query";
 import { tokenManager } from "@utils/tokenManager";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const logoutHandling = async () => {
@@ -25,6 +27,7 @@ const HomePage = () => {
       setIsLoading(false);
       tokenManager.clearAccessToken();
       tokenManager.clearRefreshToken();
+      queryClient.invalidateQueries();
       navigate(EROUTES.AUTH);
     }
   };
