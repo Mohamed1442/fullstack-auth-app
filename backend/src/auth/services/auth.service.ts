@@ -63,6 +63,7 @@ export class AuthService {
   }
 
   async login(loginRequestDto: LoginRequestDto): Promise<ITokens> {
+    this.logger.log(`Login attempt for email: ${loginRequestDto.email}`);
     const { email, password } = loginRequestDto;
 
     const user = await this.userService.findUserByEmail(email);
@@ -99,6 +100,8 @@ export class AuthService {
   }
 
   async getNewRefreshToken(oldRefreshToken: string): Promise<ITokens> {
+    this.logger.log(`Refresh token request received: ${oldRefreshToken}`);
+
     if (!oldRefreshToken) {
       throw new ForbiddenException(
         'Unable to refresh token. Please log in again.',
@@ -124,7 +127,7 @@ export class AuthService {
       );
     }
 
-    // revoke the old refresh token
+    // revoke the old refresh token for single session
     await this.revokeAllRefreshTokensOfUser(refreshTokenToFind.id);
 
     const { accessToken, refreshToken } =
