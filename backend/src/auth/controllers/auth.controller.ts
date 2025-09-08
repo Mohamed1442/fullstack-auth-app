@@ -31,8 +31,21 @@ export class AuthController {
   @Post('register')
   @ApiOperation({ summary: 'Registeration for new user' })
   @ApiSingleDataResponse(LoginResponseDto)
-  async register(@Body() signupRequestDto: SignupRequestDto) {
+  async register(
+    @Body() signupRequestDto: SignupRequestDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const tokens = await this.authService.register(signupRequestDto);
+
+    // set refresh token in cookie
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      secure: this.configService.getOrThrow('NODE_ENV') !== 'local',
+      sameSite: 'none',
+      maxAge: +ms(
+        this.configService.getOrThrow('JWT_REFRESH_TOKEN_EXPIRE_TIME_STRING'),
+      ),
+    });
 
     return ResponseBuilder.buildSingle(new LoginResponseDto(tokens));
   }
