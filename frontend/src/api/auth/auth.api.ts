@@ -4,6 +4,7 @@ import type {
   IRegesterRequest,
   TAuthResponse,
 } from "@api/auth/auth.types";
+import axiosInstance from "@api/axiosConfig";
 import { authEndpoints } from "@constants/endpoints";
 import envConfigKeys from "@constants/envConfig";
 import { tokenManager } from "@utils/tokenManager";
@@ -36,8 +37,9 @@ export const signupApi = async (
   return data.data;
 };
 
+// logout need to be attached to interceptor life cycle so we used global axios instance
 export const logoutApi = (): Promise<void> =>
-  authAxiosInstance.post(
+  axiosInstance.post(
     authEndpoints.logout,
     {},
     {
