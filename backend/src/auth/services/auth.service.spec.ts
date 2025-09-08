@@ -151,8 +151,8 @@ describe('AuthService', () => {
       usersService.findUserByEmail.mockResolvedValue({
         _id: '1',
         email: 'test@test.com',
-        password: 'hashed',
-        name: 'John',
+        password: 'some-hashed-passord',
+        name: 'Omar',
         role: ERole.USER,
       } as any);
 
@@ -207,7 +207,7 @@ describe('AuthService', () => {
       usersService.findUserById.mockResolvedValue({
         _id: '1',
         email: 'test@test.com',
-        name: 'John',
+        name: 'Mohamed',
         role: ERole.USER,
       } as any);
       jwtService.signAsync.mockResolvedValue('access-token');

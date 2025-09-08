@@ -8,9 +8,6 @@ export class LoginResponseDto {
   @ApiResponseProperty({ example: 'some-refresh-token' })
   refreshToken: string;
 
-  @ApiResponseProperty({ example: 'APPROVED' })
-  status: string;
-
   constructor(data: ITokens) {
     this.accessToken = data.accessToken;
     this.refreshToken = data.refreshToken;

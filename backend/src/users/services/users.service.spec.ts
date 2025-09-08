@@ -22,7 +22,7 @@ describe('UsersService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService, UsersRepository], // no need to provide manually, jest.mock already overrides it
+      providers: [UsersService, UsersRepository],
     }).compile();
 
     service = module.get<UsersService>(UsersService);
